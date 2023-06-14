@@ -3,7 +3,9 @@ import {useState} from 'react';
 import {PriorityColorMapping} from "../helper/enums";
 import {ITodo} from "../helper/interfaces";
 import {useDispatch} from "react-redux";
-import {toggleTodoStatus} from "../redux/actions";
+// import {toggleTodoStatus} from "../redux/actions";
+import todoSlice from "../TodoList/todoSlice";
+import {TODOACTIONS} from "../helper/constants";
 
 const Todo = ({name, priority, completed, id}:ITodo) => {
     const [checked, setChecked] = useState(completed)
@@ -11,7 +13,8 @@ const Todo = ({name, priority, completed, id}:ITodo) => {
 
     const toggleCheckbox = () => {
         setChecked(!checked);
-        dispatch(toggleTodoStatus(id))
+        // dispatch(toggleTodoStatus(id))
+        dispatch(todoSlice.actions[TODOACTIONS.TOGGLE_TODO](id))
     }
     return (
         <Row justify='space-between'

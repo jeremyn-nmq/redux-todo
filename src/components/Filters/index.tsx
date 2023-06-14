@@ -2,7 +2,9 @@ import { Col, Row, Input, Typography, Radio, Select, Tag } from 'antd';
 import {PRIORITY, PriorityColorMapping, STATUS} from "../helper/enums";
 import {ChangeEvent, useState} from "react";
 import {useDispatch} from "react-redux";
-import {priorityFilterChange, searchFilterChange, statusFilterChange} from "../redux/actions";
+// import {priorityFilterChange, searchFilterChange, statusFilterChange} from "../redux/actions";
+import filtersSlice from "./filtersSlice";
+import {FILTERACTIONS} from "../helper/constants";
 
 const {Search} = Input
 
@@ -14,17 +16,20 @@ const Filters = () => {
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value)
-        dispatch(searchFilterChange(e.target.value))
+        // dispatch(searchFilterChange(e.target.value))
+        dispatch(filtersSlice.actions[FILTERACTIONS.SEARCH_TODO](e.target.value))
     }
 
     const handleStatusChange = (e: any) => {
         setStatusValue(e.target.value)
-        dispatch(statusFilterChange(e.target.value))
+        // dispatch(statusFilterChange(e.target.value))
+        dispatch(filtersSlice.actions[FILTERACTIONS.STATUS_CHANGE](e.target.value))
     }
 
     const handlePriorityChange = (value: any) => {
         setPriorityValue(value)
-        dispatch(priorityFilterChange(value))
+        // dispatch(priorityFilterChange(value))
+        dispatch(filtersSlice.actions[FILTERACTIONS.PRIORITY_CHANGE](value))
     }
 
     return (

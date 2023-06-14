@@ -3,9 +3,10 @@ import Todo from '../Todo';
 import {PRIORITY, PriorityColorMapping} from "../helper/enums";
 import {useDispatch, useSelector} from "react-redux";
 import {ITodo} from "../helper/interfaces";
-import {addTodo} from "../redux/actions";
 import {ChangeEvent, useState} from "react";
 import {todosRemainingSelector} from "../redux/selectors";
+import todoSlice from "./todoSlice";
+import {TODOACTIONS} from "../helper/constants";
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -27,7 +28,8 @@ const TodoList = () => {
             completed: false,
             priority: todoPriority
         }
-        dispatch(addTodo(data))
+        // dispatch(addTodo(data))
+        dispatch(todoSlice.actions[TODOACTIONS.ADD_TODO](data))
         setTodoName('')
         setTodoPriority(PRIORITY.Medium)
     }
